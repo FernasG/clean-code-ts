@@ -1,1 +1,1 @@
-# Clean Code and Clear Architecture with TS
+# Clean Code and Clean Architecture with TS
