@@ -5,6 +5,11 @@ test("Deve validar CPF válido", () => {
     expect(result).toBe(true);
 });
 
+test("Deve validar CPF inválido", () => {
+    const result = validateCPF('236.987.321-09');
+    expect(result).toBe(false);
+});
+
 test("Deve validar CPF válido com digito verificador igual a 0", () => {
     const result = validateCPF('693.875.190-07');
     expect(result).toBe(true);
