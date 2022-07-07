@@ -1,4 +1,4 @@
-import { validate } from "../src/cpf";
+import { validate } from "../src/cpfBefore";
 
 test("Deve validar CPF válido", () => {
     const result = validate('308.021.220-78');
