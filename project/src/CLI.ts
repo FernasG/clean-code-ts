@@ -1,3 +1,5 @@
+// Adapter
+import ItemRepositoryDatabase from "./ItemRepositoryDatabase";
 import PreviewOrder from "./PreviewOrder";
 
 let cpf: string = '';
@@ -16,7 +18,8 @@ process.stdin.on("data", async (chunk) => {
     }
 
     if (command.startsWith('preview')) {
-        const result = await new PreviewOrder().execute({ cpf, orderItems });
+        const itemRepository = new ItemRepositoryDatabase();
+        const result = await new PreviewOrder(itemRepository).execute({ cpf, orderItems });
         console.log(`total: ${result.total}`);
     }
 });
