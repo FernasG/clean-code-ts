@@ -1,0 +1,12 @@
+version: '3.9'
+
+services: 
+  app-db:
+    container_name: app-db
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD: 123456
