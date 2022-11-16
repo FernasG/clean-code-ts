@@ -2,12 +2,10 @@ import OrderRepository from "./OrderRepository";
 import ItemRepository from "./ItemRepository";
 import Order from "./Order";
 
-export default class PreviewOrder {
-    // Secondary Port (Driven)
-    constructor(readonly itemRepository: ItemRepository) { }
+export default class OrderCheckout {
+    constructor(readonly itemRepository: ItemRepository, readonly orderRepository: OrderRepository) { }
 
-    // Primary Port (Driver)
-    async execute(input: Input): Promise<Output> {
+    async checkout(input: Input): Promise<void> {
         const { cpf, orderItems } = input;
         const order = new Order(cpf);
 
@@ -16,15 +14,11 @@ export default class PreviewOrder {
             order.addItem(item, orderItem.quantity);
         }
 
-        return { total: order.getTotal() };
+        this.orderRepository.save(order);
     }
 }
 
 type Input = {
     cpf: string,
     orderItems: { idItem: number, quantity: number }[]
-}
-
-type Output = {
-    total: number
 }

@@ -15,6 +15,17 @@ export default class Order {
         this.orderItems = [];
     }
 
+    genOrderCode() {
+        const yyyy = this.date.getFullYear();
+
+        let itemsSeq = this.orderItems.reduce((previous, current) => {
+            return previous += current.idItem.toString().padStart(2, "0");
+        }, '');
+
+        const pppp = itemsSeq.length < 8 ? itemsSeq.padStart(8, "0") : itemsSeq.substring(0, 8);
+        return `${yyyy}${pppp}`;
+    }
+
     addItem(item: Item, quantity: number) {
         if (this.orderItems.some(orderItem => orderItem.idItem === item.idItem)) throw new Error("Duplicated item");
         this.orderItems.push(new OrderItem(item.idItem, item.price, quantity));
